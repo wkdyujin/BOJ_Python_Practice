@@ -1,14 +1,12 @@
-room_num = str(input())
-arr = []
-result = 0
+roomNum = input()
+numCnt = [0] * 9
 
-for i in range(10):
-    arr.append(room_num.count(str(i)))
+for n in range(len(roomNum)):
+    if (int(roomNum[n]) == 9):
+        numCnt[6] += 1
+    else:
+        numCnt[int(roomNum[n])] += 1
+        
+numCnt[6] = (numCnt[6] + 1) // 2
 
-sixnine = (arr[6] + arr[9] + 1) // 2
-arr[6], arr[9] = 0, 0
-
-if (max(arr) < sixnine):
-    print(sixnine)
-else:
-    print(max(arr))
+print(max(numCnt))
