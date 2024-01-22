@@ -1,21 +1,21 @@
 import sys
-
 input = sys.stdin.readline
 
 n = int(input())
-
-arr = [[0, 0] for _ in range(n)]
+times = []
 for i in range(n):
-    arr[i][0], arr[i][1] = map(int, input().split())
+    start, end = map(int, input().split())
+    times.append([start, end])
 
-arr.sort(key=lambda x: (x[1], x[0]))  # 종료 시간을 우선으로 모든 인덱스를 오름차순 정렬
+# 종료 시간 기준 정렬
+times.sort(key = lambda x: (x[1], x[0]))
 
-count = 1  # 첫번째 회의는 무조건 사용 가능
-end = arr[0][1]  # 첫번째 회의의 종료 시간
+cur_e = times[0][1] # 종료
+res = 1
 
-for i in range(1, n):  # 종료 시간이 이른 순서대로 회의실 배정
-    if arr[i][0] >= end:  # 시작 시간이 이전 회의 종료 시간보다 늦으면 배정
-        end = arr[i][1]
-        count += 1
+for i in range(1, n):
+    if times[i][0] >= cur_e:
+        cur_e = times[i][1]
+        res += 1
 
-print(count)
+print(res)
